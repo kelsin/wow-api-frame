@@ -5,7 +5,7 @@
   <groupId>com.valefor</groupId>
   <artifactId>wow-api-frame</artifactId>
   <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1-SNAPSHOT</version>
   <name>wow-api-frame Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
