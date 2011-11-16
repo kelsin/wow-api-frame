@@ -11,7 +11,6 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
   <context:component-scan base-package="com.valefor.wowapiframe"/>
-  <!-- <mvc:default-servlet-handler/> -->
   <bean id="viewResolver"
         class="org.springframework.web.servlet.view.UrlBasedViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
