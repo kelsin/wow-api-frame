@@ -8,5 +8,6 @@
       <option value="${realm.slug}">${realm.name}</option>
     </#list>
   </select>
+  <input type="submit" name="submit" value="Load Character" />
 </form>
 <#include "/footer.ftl">
