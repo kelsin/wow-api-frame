@@ -23,4 +23,10 @@
     <property name="prefix" value=""/>
     <property name="suffix" value=".ftl"/>
   </bean>
+
+  <!-- Realms -->
+  <bean id="realmList" class="com.valefor.wowapiframe.model.RealmList" init-method="init"/>
+  <bean id="charactersController" class="com.valefor.wowapiframe.CharactersController">
+    <property name="realmList" ref="realmList" />
+  </bean>
 </beans>
