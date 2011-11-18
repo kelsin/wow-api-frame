@@ -1,13 +1,10 @@
 package com.valefor.wowapiframe.model;
 
 // Java Imports
-import java.util.List;
-import java.util.Vector;
+import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.Iterator;
-import java.net.URL;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 // HttpClient Imports
 import org.apache.http.HttpResponse;
@@ -36,23 +33,30 @@ import com.valefor.wowapiframe.model.Realm;
  */
 public class RealmList {
     /**
-     * The list of realms
+     * The Map of realms
      */
-    private List<Realm> realms;
+    private Map<String,Realm> realms;
 
     /**
      * Return the list of Realms
      *
      * @return A List of all of the known Realms
      */
-    public List<Realm> all() { return this.realms; }
+    public Collection<Realm> all() { return this.realms.values(); }
 
     /**
      * Add a realm to this RealmList
      *
      * @param r The realml to add
      */
-    public void addRealm(Realm r) { realms.add(r); }
+    public void addRealm(Realm r) { this.realms.put(r.getSlug(), r); }
+
+    /**
+     * Finds a realm by the slug
+     *
+     * @param slug The slug of the realm to find
+     */
+    public Realm findBySlug(String slug) { return realms.get(slug); }
 
     /**
      * Returns the total number of Realms in the list
@@ -60,6 +64,13 @@ public class RealmList {
      * @return the total number of Realms in the list
      */
     public int size() { return realms.size(); }
+
+    /**
+     * Creates a new empty RealmList
+     */
+    RealmList() {
+        this.realms = new TreeMap<String,Realm>();
+    }
 
     /**
      * Calls out to the Blizzard API and fills the realm list
@@ -98,16 +109,13 @@ public class RealmList {
      * @param json The String of JSON containing the realm data
      */
     private void loadFromJson(String json) {
-        this.realms = new Vector<Realm>();
-
         Gson gson = new Gson();
         JsonParser parser = new JsonParser();
         JsonArray array = parser.parse(json.toString()).getAsJsonObject().getAsJsonArray("realms");
 
         Iterator<JsonElement> i = array.iterator();
         while(i.hasNext()) {
-            Realm realm = gson.fromJson(i.next(), Realm.class);
-            this.realms.add(realm);
+            this.addRealm(gson.fromJson(i.next(), Realm.class));
         }
 
         System.out.println("Loaded " + this.size() + " realms");

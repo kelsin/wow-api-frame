@@ -1,5 +1,5 @@
 <#include "/header.ftl">
-<form method="post" action="/submit">
+<form method="post">
   <label for="character">Character</label>
   <input type="text" name="character" />
   <label for="realm">Realm</label>

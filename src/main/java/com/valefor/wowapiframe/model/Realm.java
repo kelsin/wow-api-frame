@@ -1,6 +1,6 @@
 package com.valefor.wowapiframe.model;
 
-public class Realm {
+public class Realm implements Comparable<Realm> {
     private String type;
     private String name;
     private String slug;
@@ -9,10 +9,7 @@ public class Realm {
     public String getName() { return this.name; }
     public String getSlug() { return this.slug; }
 
-    public void setType(String type) { this.type = type; }
-    public void setName(String name) { this.name = name; }
-    public void setSlug(String slug) { this.slug = slug; }
-
-    Realm() {
+    public int compareTo(Realm r) {
+        return this.name.compareTo(r.getName());
     }
 }
