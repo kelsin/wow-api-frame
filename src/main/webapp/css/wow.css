@@ -4,3 +4,9 @@ body {
     background-color: #333;
     color: #fff;
 }
+
+a { color: #3af; text-decoration: none; }
+
+td, th { padding: 0.4em; }
+tr.odd td { background-color: #444; }
+th { text-align: left; font-weight: bold; }

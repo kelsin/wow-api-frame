@@ -8,4 +8,8 @@ public class Boss {
     public String getName() { return this.name; }
     public int getNormalKills() { return this.normalKills; }
     public int getHeroicKills() { return this.heroicKills; }
+
+    public String getSlug() {
+        return this.name.toLowerCase().replaceAll("-|'","").replace(' ', '-');
+    }
 }

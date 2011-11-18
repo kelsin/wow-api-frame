@@ -16,4 +16,8 @@ public class Raid {
     public int getNormal() { return this.normal; }
     public int getHeroic() { return this.heroic; }
     public List<Boss> getBosses() { return this.bosses; }
+
+    public String getSlug() {
+        return this.name.toLowerCase().replaceAll("-|'","").replace(' ', '-');
+    }
 }
