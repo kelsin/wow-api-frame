@@ -2,11 +2,17 @@ package com.valefor.wowapiframe.model;
 
 import java.util.List;
 import java.util.Vector;
+import java.util.Iterator;
 import java.net.URL;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import org.json.simple.*;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonElement;
 
 import com.valefor.wowapiframe.model.Realm;
 
@@ -34,14 +40,14 @@ public class RealmList {
         } catch (Exception e) {
         }
 
-        JSONArray ary = (JSONArray)((JSONObject)JSONValue.parse(json.toString())).get("realms");
-        for(Object o : ary) {
-            JSONObject r = (JSONObject)o;
-            Realm realm = new Realm();
-            realm.setType((String)r.get("type"));
-            realm.setName((String)r.get("name"));
-            realm.setSlug((String)r.get("slug"));
-            this.addRealm(realm);
+        Gson gson = new Gson();
+        JsonParser parser = new JsonParser();
+        JsonArray array = parser.parse(json.toString()).getAsJsonObject().getAsJsonArray("realms");
+
+        Iterator<JsonElement> i = array.iterator();
+        while(i.hasNext()) {
+            Realm realm = gson.fromJson(i.next(), Realm.class);
+            this.realms.add(realm);
         }
 
         System.out.println("Loaded " + this.size() + " realms");
